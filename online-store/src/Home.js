@@ -15,13 +15,20 @@ function Home() {
                     <Product title='Kashonche za konsumatori'
                         price={69.99}
                         image='http://kupimed.bg/php_assets/uploads/2020/12/cropped_kashon.png'
-                        rating={5} />
-                    <Product />
+                        rating={5}
+                    />
                 </div>
                 <div className='home__row'>
-                    <Product />
-                    <Product />
-                    <Product />
+                    <Product title='Kashonche za konsumatori'
+                        price={69.99}
+                        image='http://kupimed.bg/php_assets/uploads/2020/12/cropped_kashon.png'
+                        rating={5}
+                    />
+                    <Product title='Kashonche za konsumatori'
+                        price={69.99}
+                        image='http://kupimed.bg/php_assets/uploads/2020/12/cropped_kashon.png'
+                        rating={5}
+                    />
                 </div>
             </div>
         </div>
