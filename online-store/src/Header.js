@@ -17,7 +17,7 @@ function Header() {
 
     return (
         <div className='header'>
-            <Link to='/'>
+            <Link className='text-link' to='/'>
                 <img className='header__logo'
                     src='http://kupimed.bg/php_assets/uploads/2017/12/Untitled1.jpg-2048x1736.png' />
             </Link>
@@ -32,10 +32,10 @@ function Header() {
             </div>
 
             <div className='header__nav'>
-                <Link to={!user && '/login'}>
+                <Link className='text-link' to={!user && '/login'}>
                     <div onClick={handleAuthentication} className='header__option'>
                         <span
-                            className='header__optionLineOne'>Hello Guest
+                            className='header__optionLineOne'>{user ? `Hi ${user.email}!` : `Hello Guest`}
                         </span>
                         <span
                             className='header__optionLineTwo'>{user ? 'Sign Out' : 'Sign In'}
