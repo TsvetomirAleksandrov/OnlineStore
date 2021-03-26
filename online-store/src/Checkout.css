@@ -11,5 +11,6 @@ height: max-content;
 }
 
 .checkout__title {
-
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
 }
