@@ -43,25 +43,18 @@ function Header() {
                     </div>
                 </Link>
 
-                <div className='header__option'>
-                    <span
-                        className='header__optionLineOne'>Returns
+                <Link className='text-link' to='/orders'>
+                    <div className='header__option'>
+                        <span
+                            className='header__optionLineOne'>My
                         </span>
-                    <span
-                        className='header__optionLineTwo'>& Orders
+                        <span
+                            className='header__optionLineTwo'>Orders
                         </span>
-                </div>
+                    </div>
+                </Link>
 
-                <div className='header__option'>
-                    <span
-                        className='header__optionLineOne'>Your
-                        </span>
-                    <span
-                        className='header__optionLineTwo'>Prime
-                        </span>
-                </div>
-
-                <Link to='/checkout'>
+                <Link className='text-link' to='/checkout'>
                     <div className='header__optionBasket'>
                         <ShoppingBasketIcon />
                         <span className='header__optionLineTwo header__basketCount'>
