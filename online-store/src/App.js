@@ -11,11 +11,14 @@ import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import AdminPanel from "./AdminPanel";
+import Edit from "./Edit";
+import AddItem from "./AddItem";
 
 const promise = loadStripe('pk_test_51IZFxCKyrTYhmZjRBxrvyHk5rq2YRvJMLAvdQTJ2qYOV9fJHDcdmHCBEZiD63vL0KXoZOTGqpQ0oBnHtIVwZrmJt00Wz2DRaog');
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [{ }, dispatch] = useStateValue();
 
   useEffect(() => {
     // will only run once when the app component loads...
@@ -44,6 +47,18 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
+          <Route path="/add">
+            <Header />
+            <AddItem />
+          </Route>
+          <Route path="/edit">
+            <Header />
+            <Edit />
+          </Route>
+          <Route path="/admin">
+            <Header />
+            <AdminPanel />
+          </Route>
           <Route path="/orders">
             <Header />
             <Orders />
