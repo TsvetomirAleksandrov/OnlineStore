@@ -22,20 +22,30 @@ function Header() {
                     src='http://kupimed.bg/php_assets/uploads/2017/12/Untitled1.jpg-2048x1736.png' />
             </Link>
 
-
-            <div className='header__search'>
+            {/* <div className='header__search'>
                 <input
                     className='header__searchInput'
                     type='text' />
                 <SearchIcon
                     className='header__searchIcon' />
-            </div>
+            </div> */}
 
             <div className='header__nav'>
+                {user ? (<Link className='text-link' to='/admin'>
+                    <div className='header__option'>
+                        <span
+                            className='header__optionLineOne'>Admin
+                        </span>
+                        <span
+                            className='header__optionLineTwo'>Panel
+                        </span>
+                    </div>
+                </Link>) : ('')}
+
                 <Link className='text-link' to={!user && '/login'}>
                     <div onClick={handleAuthentication} className='header__option'>
                         <span
-                            className='header__optionLineOne'>Hello {user ? user.email : `Guest`}
+                            className='header__optionLineOne'>Hello, {user ? user.email : `Guest`}
                         </span>
                         <span
                             className='header__optionLineTwo'>{user ? 'Sign Out' : 'Sign In'}
