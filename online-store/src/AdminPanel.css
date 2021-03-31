@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
 .panel__logo {
@@ -13,16 +14,6 @@
     width: 100px;
     margin-right: auto;
     margin-left: auto;
-}
-
-.panel__AddButton {
-    background: #00ff4c;
-    border-radius: 2px;
-    width: 100%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: #a88734 #9c7e31 #846a29;
 }
 
 .panel__EditButton {
@@ -46,6 +37,7 @@
 }
 
 .panel__container {
+    margin-top: 30px;
     width: 300px;
     height: fit-content;
     display: flex;
@@ -53,6 +45,7 @@
     border-radius: 5px;
     border: 1px solid lightgray;
     padding: 20px;
+    text-align: center;
 }
 
 .panel__container > h1 {
@@ -76,15 +69,20 @@
     font-size: 12px;
 }
 
+.button__container {
+    margin-top: 100px;
+    margin-bottom: 150px;
+}
+
 .panelList__container {
-    margin-top: 20px;
-    width: 300px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    padding: 20px;
+   margin-top: 30px;
+   text-align: center;
+   display: flex;
+}
+
+.panelList{
+    margin-top: 50px;
+    text-align: center;
 }
 
 .panelList__container > h1 {
@@ -107,3 +105,16 @@
     margin-top: 15px;
     font-size: 12px;
 }
+
+.image__list {
+    width: 150px;
+}
+
+.button__list {
+margin-left: 10px;
+}
+
+.deleteBtn {
+    margin-left: 20px;
+}
+

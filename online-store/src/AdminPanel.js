@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './AdminPanel.css'
-import { Link } from 'react-router-dom';
-import axios from './axios';
+import { Link, useHistory } from 'react-router-dom';
 import { db } from "./firebase";
+import { Button, Card, CardDeck, Row, Col, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AdminPanel() {
+    const history = useHistory();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -15,79 +17,70 @@ function AdminPanel() {
         fetchData()
     }, []);
 
-    const initialStateValues = {
-        id: Number(''),
-        title: '',
-        price: Number(''),
-        image: ''
-    };
+    const onDelete = (id) => {
+        console.log(`id is --> ${id}`);
 
-    const [values, setValues] = useState(initialStateValues);
+        db.collection('products')
+            .doc(`${id}`)
+            .delete();
 
-    const handleInputChange = e => {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
+        alert('Item Deleted Successfully!');
+        window.location.reload(false);
     }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        db
-            .collection('products')
-            .doc()
-            .set({
-                id: Number(values.id),
-                title: values.title,
-                price: Number(values.price),
-                image: values.imgURL,
-            })
-
-        alert('Product Added Successfully!');
-    }
-
 
     return (
         <div className='adminPanel'>
             <h1>Admin Panel</h1>
-            <Link to='/'>
-                <img className='panel__logo' src='http://kupimed.bg/php_assets/uploads/2017/12/Untitled1.jpg-2048x1736.png' />
-            </Link>
 
-            <div className='panel__container'>
-                <h1>Add Product</h1>
-
-                <form onSubmit={handleSubmit}>
-                    <h5>Id</h5>
-                    <input type='text' name='id' onChange={handleInputChange} />
-
-                    <h5>Title</h5>
-                    <input type='text' name='title' onChange={handleInputChange} />
-
-                    <h5>Price</h5>
-                    <input type='text' name='price' onChange={handleInputChange} />
-
-                    <h5>Image Url</h5>
-                    <input type='text' name='imgURL' onChange={handleInputChange} />
-
-                    <button type='submit' className='panel__AddButton'>Add</button>
-                    {/* <button type='submit' className='panel__EditButton'>Edit</button>
-                    <button type='submit' className='panel__DeleteButton'>Delete</button> */}
-                </form>
+            <div className='button__container'>
+                <Link to='/add'>
+                    <Button className='btn btn-lg'>Add item</Button>
+                </Link>
             </div>
 
-            <div className='panelList__container'>
-                <h1>Product List</h1>
+            <div className='panelList'>
+                <h1>Item List</h1>
 
-                <ul>
-                    {products.map(product => (
-                        <li key={products.id}>{product.title} - {product.price}</li>
-                    ))}
-                </ul>
+                <div className='panelList__container'>
 
-            </div>
+                    <CardDeck>
+                        <Container>
+                            <Row >
+                                {products.length > 0 ? (products.map(product => (
+                                    <Col sm md lg='auto'>
+                                        <Card style={{ width: '18rem' }}>
+                                            <Card.Img variant="top" src={product.image} />
+                                            <Card.Body>
+                                                <Card.Title>{product.title}</Card.Title>
+                                                <Card.Text>
+                                                    {product.price}
+                                                </Card.Text>
+                                                <Link
+                                                    to={{
+                                                        pathname: '/Edit',
+                                                        state: {
+                                                            id: product.id,
+                                                            title: product.title,
+                                                            price: product.price,
+                                                            image: product.image
+                                                        }
+                                                    }}>
+                                                    <Button variant="primary">Edit</Button>
+                                                </Link>
 
+                                                <Button className='deleteBtn' variant="danger" onClick={() => onDelete(product.id)}>Delete</Button>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                ))) : (<p>No items yet... Please add an item.. 😓</p>)
+                                }
+                            </Row>
+                        </Container>
+                    </CardDeck>
 
-        </div>
+                </div >
+            </div >
+        </div >
     );
 };
 
