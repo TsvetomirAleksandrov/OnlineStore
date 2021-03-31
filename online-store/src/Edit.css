@@ -1,0 +1,96 @@
+.edit {
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.panel__logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.panel__EditButton {
+    background: #ffd900;
+    border-radius: 2px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+}
+
+.panel__DeleteButton {
+    background: #ff0000;
+    border-radius: 2px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+}
+
+.panel__container {
+    width: 70%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 3px solid lightgray;
+    padding: 20px;
+}
+
+.panel__container > h1 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.panel__container > form > h1 {
+    margin-bottom: 5px;
+}
+
+.panel__container > form > input {
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: white;
+    width: 98%;
+}
+
+.panel__container > p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.panelList__container > h1 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.panelList__container > form > h1 {
+    margin-bottom: 5px;
+}
+
+.panelList > form > input {
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: white;
+    width: 98%;
+}
+
+.panelList__container > p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.image__list {
+    width: 150px;
+}
+
+.button__list {
+margin-left: 10px;
+}
