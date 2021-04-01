@@ -1,0 +1,12 @@
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(255, 166, 0);
+    color: white;
+    position: relative;
+    margin-top: auto;
+}
+
+.footer__text {
+    color: black
+}

@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Header from "./Header";
-import Home from "./Home";
+import Header from "../Header/Header";
+import Home from "../Home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Checkout from "./Checkout";
-import Login from "./Login";
-import Payment from "./Payment";
-import Orders from "./Orders";
-import { auth } from "./firebase";
-import { useStateValue } from "./StateProvider";
+import Checkout from "../Checkout/Checkout";
+import Login from "../Login/Login";
+import Payment from "../Order/Payment";
+import Orders from "../Order/Orders";
+import { auth } from "../firebase";
+import { useStateValue } from "../StateProvider";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import AdminPanel from "./AdminPanel";
-import Edit from "./Edit";
-import AddItem from "./AddItem";
+import AdminPanel from "../AdminPanel/AdminPanel";
+import Edit from "../AdminPanel/Edit";
+import AddItem from "../AdminPanel/AddItem";
+import Footer from "../Footer/Footer";
+
 
 const promise = loadStripe('pk_test_51IZFxCKyrTYhmZjRBxrvyHk5rq2YRvJMLAvdQTJ2qYOV9fJHDcdmHCBEZiD63vL0KXoZOTGqpQ0oBnHtIVwZrmJt00Wz2DRaog');
 
@@ -50,18 +52,22 @@ function App() {
           <Route path="/add">
             <Header />
             <AddItem />
+            
           </Route>
           <Route path="/edit">
             <Header />
             <Edit />
+            
           </Route>
           <Route path="/admin">
             <Header />
             <AdminPanel />
+            
           </Route>
           <Route path="/orders">
             <Header />
             <Orders />
+            
           </Route>
           <Route path="/login">
             <Login />
@@ -69,6 +75,7 @@ function App() {
           <Route path="/checkout">
             <Header />
             <Checkout />
+           
           </Route>
           <Route path="/payment">
             <Header />
@@ -79,6 +86,7 @@ function App() {
           <Route path="/">
             <Header />
             <Home />
+           
           </Route>
         </Switch>
       </div>

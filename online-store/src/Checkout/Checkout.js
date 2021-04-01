@@ -1,8 +1,9 @@
 import React from 'react';
 import './Checkout.css';
-import CheckoutProduct from './CheckoutProduct';
-import { useStateValue } from './StateProvider';
+import CheckoutProduct from './CheckoutProduct.js';
+import { useStateValue } from '../StateProvider';
 import Subtotal from './Subtotal';
+import FlipMove from 'react-flip-move';
 
 function Checkout() {
     const [{ basket, user }, dispatch] = useStateValue();
@@ -10,12 +11,13 @@ function Checkout() {
     return (
         <div className='checkout'>
             <div className='checkout__left'>
-                <img className='checkout__ad' src='http://kupimed.bg/php_assets/uploads/2017/12/1312.jpg'
+                <img className='checkout__ad' src='https://i.ibb.co/hRNkxP1/website-0023-Vector-Smart-Object.png'
+                    alt=""
                 />
 
                 <div>
                     <h3>Hello, {user ? user.email : 'Guest'}</h3>
-                    <h2 className='checkout__title'>Your shopping Basket</h2>
+                    <h2 className='checkout__title'>Your shopping Basket:</h2>
                     {basket.map(item => (
                         <CheckoutProduct
                             id={item.id}

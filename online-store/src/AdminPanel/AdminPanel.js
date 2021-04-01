@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './AdminPanel.css'
-import { Link, useHistory } from 'react-router-dom';
-import { db } from "./firebase";
+import { Link } from 'react-router-dom';
+import { db } from "../firebase";
 import { Button, Card, CardDeck, Row, Col, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AdminPanel() {
-    const history = useHistory();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -17,10 +16,8 @@ function AdminPanel() {
         fetchData()
     }, []);
 
-    const onDelete = (id) => {
-        console.log(`id is --> ${id}`);
-
-        db.collection('products')
+    const onDelete = async (id) => {
+        await db.collection('products')
             .doc(`${id}`)
             .delete();
 
@@ -50,10 +47,10 @@ function AdminPanel() {
                                     <Col sm md lg='auto'>
                                         <Card style={{ width: '18rem' }}>
                                             <Card.Img variant="top" src={product.image} />
-                                            <Card.Body>
+                                            <Card.Body >
                                                 <Card.Title>{product.title}</Card.Title>
                                                 <Card.Text>
-                                                    {product.price}
+                                                    ${product.price}
                                                 </Card.Text>
                                                 <Link
                                                     to={{
