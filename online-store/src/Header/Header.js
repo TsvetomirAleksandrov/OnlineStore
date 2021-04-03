@@ -7,7 +7,7 @@ import { auth } from '../firebase';
 import { Form, Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Header() {
+function Header({ cartItems }) {
     const [{ basket, user }, dispatch] = useStateValue();
 
     const handleAuthentication = () => {
@@ -15,6 +15,15 @@ function Header() {
             auth
                 .signOut();
         }
+    }
+
+    const getCount = () => {
+        let count = 0;
+        cartItems.forEach((item) => {
+            count += item.item.quantity;
+        })
+
+        return count;
     }
 
     return (
@@ -56,7 +65,7 @@ function Header() {
                         <div className="header__optionBasket">
                             <ShoppingBasketIcon />
                             <span className="header__optionLineTwo header__basketCount">
-                                {basket?.length}
+                                {getCount()}
                             </span>
                         </div>
                     </Link>
