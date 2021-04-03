@@ -3,7 +3,7 @@ import './Home.css';
 import Product from '../Product/Product';
 import { db } from '../firebase'
 import { AnimationWrapper } from 'react-hover-animation'
-import { CardDeck, Container, Row, Col } from 'react-bootstrap';
+import { CardDeck, Container, Row } from 'react-bootstrap';
 
 
 function Home() {
@@ -12,7 +12,6 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await db.collection('products').get();
-      console.log(data);
       setProducts(data.docs.map(doc => doc.data()));
     }
     fetchData()
@@ -44,7 +43,6 @@ function Home() {
             </AnimationWrapper>
           ))}
         </div>
-
       </div>
     </div>
   );
