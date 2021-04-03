@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Subtotal() {
+function Subtotal({ getTotalPrice, getTotalQuantity }) {
   const history = useHistory();
   const [{ basket, user }, dispatch] = useStateValue();
 
@@ -17,7 +17,7 @@ function Subtotal() {
         renderText={(value) => (
           <>
             <p>
-              Subtotal ({basket.length} items): <strong>{value}</strong>
+              Subtotal ({getTotalQuantity()} items): <strong>${getTotalPrice()}</strong>
             </p>
           </>
         )}
@@ -31,8 +31,6 @@ function Subtotal() {
       {user ?
         (<Button variant="success" onClick={e => history.push('/payment')}>Proceed to Checkout</Button>) :
         (<Button variant="success" onClick={e => history.push('/login')}>Proceed to Checkout</Button>)}
-
-
     </div>
   );
 }
