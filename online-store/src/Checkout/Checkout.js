@@ -1,37 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Checkout.css';
 import CheckoutProduct from './CheckoutProduct.js';
 import { useStateValue } from '../StateProvider';
 import Subtotal from './Subtotal';
 import FlipMove from 'react-flip-move';
 
-function Checkout() {
+function Checkout({ cartItems, getTotalQuantity, getTotalPrice }) {
     const [{ basket, user }, dispatch] = useStateValue();
 
     return (
         <div className='checkout'>
             <div className='checkout__left'>
-                <img className='checkout__ad' src='https://i.ibb.co/hRNkxP1/website-0023-Vector-Smart-Object.png'
-                    alt=""
-                />
 
                 <div>
-                    <h3>Hello, {user ? user.email : 'Guest'}</h3>
-                    <h2 className='checkout__title'>Your shopping Basket:</h2>
-                    {basket.map(item => (
+                    <h2 className='checkout__title'>Shopping Cart:</h2>
+                    {cartItems.map(item => (
                         <CheckoutProduct
-                            id={item.id}
-                            title={item.title}
-                            image={item.image}
-                            price={item.price}
-                            rating={item.rating}
+                            id={item.item.id}
+                            title={item.item.title}
+                            image={item.item.image}
+                            price={item.item.price}
+                            quantity={item.item.quantity}
                         />
                     ))}
                 </div>
             </div>
 
             <div className='checkout__right'>
-                <Subtotal />
+                <Subtotal getTotalPrice={getTotalPrice} getTotalQuantity={getTotalQuantity} />
             </div>
         </div>
     );
