@@ -3,12 +3,47 @@ import './Product.css';
 import { useStateValue } from '../StateProvider';
 import { Button, Card, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { db } from '../firebase';
 
 function Product({ id, title, image, price, rating }) {
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
 
     const addToBasket = () => {
-        //dispatch the item into the Data Layer
+        const cartItem = db.collection('users')
+            .doc(user?.uid)
+            .collection('cart')
+            .doc(`${id}`);
+
+        cartItem.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    cartItem.update({
+                        item: {
+                            id: id,
+                            title: title,
+                            image: image,
+                            price: price,
+                            quantity: doc.data().item.quantity + 1,
+                        }
+                    })
+                } else {
+                    db.collection('users')
+                        .doc(user?.uid)
+                        .collection('cart')
+                        .doc(`${id}`)
+                        .set({
+                            item: {
+                                id: id,
+                                title: title,
+                                image: image,
+                                price: price,
+                                quantity: 1,
+                            }
+                        });
+                }
+
+            })
+
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
@@ -16,7 +51,6 @@ function Product({ id, title, image, price, rating }) {
                 title: title,
                 image: image,
                 price: price,
-                // rating: rating,
             }
         });
     };
