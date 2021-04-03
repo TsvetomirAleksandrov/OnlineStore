@@ -5,7 +5,6 @@ import { auth } from '../firebase';
 import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function Login() {
     const history = useHistory();
     const [email, setEmail] = useState('');
@@ -17,7 +16,9 @@ function Login() {
         auth
             .signInWithEmailAndPassword(email, password)
             .then((auth) => {
-                history.push('/')
+                if (auth) {
+                    history.push('/');
+                }
             })
             .catch(error => alert(error.message))
     }
