@@ -8,8 +8,10 @@ import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../reducer";
 import axios from '../axios';
 import { db } from "../firebase";
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Payment() {
+function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
     const [{ basket, user }, dispatch] = useStateValue();
     const history = useHistory();
 
@@ -34,9 +36,6 @@ function Payment() {
         getClientSecret();
     }, [basket])
 
-    console.log('THE SECRET IS >>>', clientSecret)
-    console.log('👱', user)
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setProcessing(true);
@@ -46,8 +45,7 @@ function Payment() {
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
-            console.log(paymentIntent.amount);
-            
+
             db.collection('users')
                 .doc(user?.uid)
                 .collection('orders')
@@ -81,12 +79,11 @@ function Payment() {
             <div className='payment__container'>
                 <h1>
                     Checkout (
-                        <Link to="/checkout">{basket?.length} items</Link>
+                        <Link to="/checkout">{getTotalQuantity()} items</Link>
                         )
                 </h1>
 
-
-                {/* Payment section - delivery address */}
+                {/* Payment section - delivery address
                 <div className='payment__section'>
                     <div className='payment__title'>
                         <h3>Delivery Address</h3>
@@ -96,26 +93,25 @@ function Payment() {
                         <p>123 React Lane</p>
                         <p>Los Angeles, CA</p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Payment section - Review Items */}
                 <div className='payment__section'>
                     <div className='payment__title'>
-                        <h3>Review items and delivery</h3>
+                        <h3>Review items</h3>
                     </div>
                     <div className='payment__items'>
-                        {basket.map(item => (
+                        {cartItems.map(item => (
                             <CheckoutProduct
-                                id={item.id}
-                                title={item.title}
-                                image={item.image}
-                                price={item.price}
-                                rating={item.rating}
+                                id={item.item.id}
+                                title={item.item.title}
+                                image={item.item.image}
+                                price={item.item.price}
+                                quantity={item.item.quantity}
                             />
                         ))}
                     </div>
                 </div>
-
 
                 {/* Payment section - Payment method */}
                 <div className='payment__section'>
@@ -123,8 +119,6 @@ function Payment() {
                         <h3>Payment Method</h3>
                     </div>
                     <div className="payment__details">
-                        {/* Stripe magic will go */}
-
                         <form onSubmit={handleSubmit}>
                             <CardElement onChange={handleChange} />
 
@@ -134,14 +128,14 @@ function Payment() {
                                         <h3>Order Total: {value}</h3>
                                     )}
                                     decimalScale={2}
-                                    value={getBasketTotal(basket)}
+                                    value={getTotalPrice()}
                                     displayType={"text"}
                                     thousandSeparator={true}
                                     prefix={"$"}
                                 />
-                                <button disabled={processing || disabled || succeeded}>
+                                <Button disabled={processing || disabled || succeeded}>
                                     <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
-                                </button>
+                                </Button>
                             </div>
 
                             {/* Errors */}
