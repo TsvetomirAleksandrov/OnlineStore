@@ -1,11 +1,20 @@
 import React from 'react';
 import './CheckoutProduct.css';
 import { useStateValue } from '../StateProvider';
+import { db } from '../firebase';
+import { Button, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
-    const [{ basket }, dispatch] = useStateValue();
+function CheckoutProduct({ id, image, title, price, quantity }) {
+    const [{ basket, user }, dispatch] = useStateValue();
 
     const removeFromBasket = () => {
+        db.collection('users')
+            .doc(user?.uid)
+            .collection('cart')
+            .doc(`${id}`)
+            .delete()
+
         dispatch({
             type: 'REMOVE_FROM_BASKET',
             id: id,
@@ -22,19 +31,16 @@ function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
                     <small>$</small>
                     <strong>{price}</strong>
                 </p>
-                {/* <div className='checkoutProduct__rating'>
-                    {Array(rating)
-                        .fill()
-                        .map((_, i) => (
-                            <p>⭐</p>
-                        ))}
-                </div> */}
-                {!hideButton && (
-                    <button onClick={removeFromBasket}>Remove from Basket</button>
-                )}
+                <div className='button__container'>
+                        <Form.Control className='input__field' size="sm" type="text" value={quantity} />
+                    <Button className='btn btn-sm' variant="warning" onClick={removeFromBasket}>Delete</Button>
+                </div>
             </div>
         </div>
     );
 };
 
 export default CheckoutProduct;
+
+
+
