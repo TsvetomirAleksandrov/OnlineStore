@@ -1,7 +1,7 @@
 import React from 'react';
 import './Product.css';
 import { useStateValue } from '../StateProvider';
-import { Button, Card, CardDeck, Row, Col, Container } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Product({ id, title, image, price, rating }) {
@@ -16,13 +16,12 @@ function Product({ id, title, image, price, rating }) {
                 title: title,
                 image: image,
                 price: price,
-                rating: rating,
+                // rating: rating,
             }
         });
     };
 
     return (
-
         <Col >
             <Card>
                 <Card.Img variant="top" className='product__image' src={image} />

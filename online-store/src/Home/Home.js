@@ -3,7 +3,7 @@ import './Home.css';
 import Product from '../Product/Product';
 import { db } from '../firebase'
 import { AnimationWrapper } from 'react-hover-animation'
-import { CardDeck, Container, Row, Col} from 'react-bootstrap';
+import { CardDeck, Container, Row, Col } from 'react-bootstrap';
 
 
 function Home() {
@@ -12,11 +12,11 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await db.collection('products').get();
+      console.log(data);
       setProducts(data.docs.map(doc => doc.data()));
     }
     fetchData()
   }, []);
-
 
   return (
     <div className='home'>
@@ -32,12 +32,12 @@ function Home() {
               <CardDeck>
                 <Container>
                   <Row >
-                      <Product
-                        id={product.id}
-                        title={product.title}
-                        price={product.price}
-                        image={product.image}
-                      />
+                    <Product
+                      id={product.id}
+                      title={product.title}
+                      price={Number(product.price)}
+                      image={product.image}
+                    />
                   </Row>
                 </Container>
               </CardDeck>
