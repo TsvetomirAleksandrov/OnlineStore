@@ -55,7 +55,7 @@ function App() {
 
   useEffect(() => {
     getCartItems();
-  })
+  }, [user])
 
   const getTotalPrice = () => {
     let total = 0;
@@ -94,7 +94,10 @@ function App() {
           </Route>
 
           <Route path="/orders">
-            <Orders />
+            <Orders
+              getTotalPrice={getTotalPrice}
+              getTotalQuantity={getTotalQuantity}
+              cartItems={cartItems} />
           </Route>
 
           <Route path="/login">
