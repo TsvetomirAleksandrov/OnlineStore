@@ -1,0 +1,38 @@
+.checkoutProduct {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.checkoutProduct__info {
+    padding-left: 20px;
+}
+
+.checkoutProduct__image {
+    object-fit: contain;
+    width: 180px;
+    height: 180px;
+}
+
+.checkoutProduct__rating {
+    display: flex;
+}
+
+.checkoutProduct__title {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.button__container{
+    display: flex;
+    width: 500px;
+    height: 30px;
+}
+
+.input__field{
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    justify-self: center;
+    margin-right: 10px;
+}
