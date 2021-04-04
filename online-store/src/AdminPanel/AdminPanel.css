@@ -72,6 +72,8 @@
 .button__container {
     margin-top: 50px;
     margin-bottom: 100px;
+    display: flex;
+    text-align: center;
 }
 
 .panelList__container {

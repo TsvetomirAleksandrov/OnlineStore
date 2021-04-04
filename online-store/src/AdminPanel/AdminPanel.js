@@ -29,7 +29,7 @@ function AdminPanel() {
         <div className='adminPanel'>
             <h1>Admin Panel</h1>
 
-            <div className='button__container'>
+            <div className='button__container row justify-content-center'>
                 <Link to='/add'>
                     <Button className='btn btn-lg'>Add item</Button>
                 </Link>
