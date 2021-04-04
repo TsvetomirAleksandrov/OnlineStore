@@ -32,7 +32,7 @@ function CheckoutProduct({ id, image, title, price, quantity }) {
                     <strong>{price}</strong>
                 </p>
                 <div className='button__container'>
-                        <Form.Control className='input__field' size="sm" type="text" value={quantity} />
+                    <Form.Control className='input__field' size="sm" type="text" defaultValue={quantity} />
                     <Button className='btn btn-sm' variant="warning" onClick={removeFromBasket}>Delete</Button>
                 </div>
             </div>
