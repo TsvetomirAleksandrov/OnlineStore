@@ -8,7 +8,7 @@ import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../reducer";
 import axios from '../axios';
 import { db } from "../firebase";
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
@@ -23,6 +23,7 @@ function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
     const [error, setError] = useState(null);
     const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState(true);
+
 
     useEffect(() => {
         const getClientSecret = async () => {
@@ -44,14 +45,14 @@ function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
-        }).then(({ paymentIntent }) => {
+        }).then(async ({ paymentIntent }) => {
 
-            db.collection('users')
+            await db.collection('users')
                 .doc(user?.uid)
                 .collection('orders')
                 .doc(paymentIntent.id)
                 .set({
-                    basket: basket,
+                    basket: cartItems,
                     amount: paymentIntent.amount,
                     created: paymentIntent.created
                 });
@@ -60,18 +61,31 @@ function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
             setError(null)
             setProcessing(false)
 
+            removeFromCart()
+
             dispatch({
                 type: 'EMPTY_BASKET'
             });
 
             history.replace('/orders');
         })
-
     }
 
     const handleChange = event => {
         setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
+    }
+
+    const removeFromCart = () => {
+        db.collection('users')
+            .doc(user?.uid)
+            .collection('cart')
+            .get()
+            .then(res => {
+                res.forEach(element => {
+                    element.ref.delete();
+                });
+            });
     }
 
     return (
@@ -133,9 +147,9 @@ function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
                                     thousandSeparator={true}
                                     prefix={"$"}
                                 />
-                                <Button disabled={processing || disabled || succeeded}>
+                                <button disabled={processing || disabled || succeeded}>
                                     <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
-                                </Button>
+                                </button>
                             </div>
 
                             {/* Errors */}
