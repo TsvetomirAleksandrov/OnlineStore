@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Checkout.css';
-import CheckoutProduct from './CheckoutProduct.js';
+import OrdersProduct from '../Order/OrdersProduct';
 import { useStateValue } from '../StateProvider';
 import Subtotal from './Subtotal';
-import FlipMove from 'react-flip-move';
+import CheckoutProduct from './CheckoutProduct';
+
 
 function Checkout({ cartItems, getTotalQuantity, getTotalPrice }) {
     const [{ basket, user }, dispatch] = useStateValue();
