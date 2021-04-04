@@ -1,10 +1,11 @@
 import React from 'react'
 import './Order.css'
 import moment from "moment";
-import CheckoutProduct from "../Checkout/CheckoutProduct";
 import CurrencyFormat from "react-currency-format";
+import OrdersProduct from './OrdersProduct';
 
 function Order({ order }) {
+    console.log('order data', order.data.basket );
     return (
         <div className='order'>
             <h2>Order</h2>
@@ -12,14 +13,14 @@ function Order({ order }) {
             <p className="order__id">
                 <small>{order.id}</small>
             </p>
+
             {order.data.basket?.map(item => (
-                <CheckoutProduct
-                    id={item.id}
-                    title={item.title}
-                    image={item.image}
-                    price={item.price}
-                    rating={item.rating}
-                    hideButton
+                <OrdersProduct
+                    id={item.item.id}
+                    title={item.item.title}
+                    image={item.item.image}
+                    price={item.item.price}
+                    quantity={item.item.quantity}
                 />
             ))}
             <CurrencyFormat
