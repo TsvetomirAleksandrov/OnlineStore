@@ -5,7 +5,7 @@ import { Button, Card, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { db } from '../firebase';
 
-function Product({ id, title, image, price, rating }) {
+function Product({ id, title, image, price, quantity }) {
     const [{ basket, user }, dispatch] = useStateValue();
 
     const addToBasket = () => {
@@ -41,7 +41,6 @@ function Product({ id, title, image, price, rating }) {
                             }
                         });
                 }
-
             })
 
         dispatch({
@@ -51,6 +50,7 @@ function Product({ id, title, image, price, rating }) {
                 title: title,
                 image: image,
                 price: price,
+                // quantity: quantity
             }
         });
     };
@@ -61,11 +61,11 @@ function Product({ id, title, image, price, rating }) {
                 <Card.Img variant="top" className='product__image' src={image} />
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
-                    <Card.Text>
-                        ${price}
+                    <Card.Text className='text-center'>
+                        <strong>${price}</strong>
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer className='text-center'>
                     <Button className='btn btn-md' variant="success" onClick={addToBasket}>Add to Basket</Button>
                 </Card.Footer>
             </Card>
