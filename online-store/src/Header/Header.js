@@ -17,6 +17,8 @@ function Header({ cartItems }) {
         }
     }
 
+    console.log(user);
+
     const getCount = () => {
         let count = 0;
         cartItems.forEach((item) => {
@@ -46,7 +48,7 @@ function Header({ cartItems }) {
                         </div>
                     </Nav.Link>
                     <Nav.Link href="/admin">
-                        {user ?
+                        {user?.email  === 'admin@gmail.com' ?
                             <div className='header__option'>
                                 <span
                                     className='header__optionLineOne'>Admin

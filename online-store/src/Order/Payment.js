@@ -45,9 +45,9 @@ function Payment({ cartItems, getTotalPrice, getTotalQuantity }) {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
-        }).then(async ({ paymentIntent }) => {
+        }).then(({ paymentIntent }) => {
 
-            await db.collection('users')
+            db.collection('users')
                 .doc(user?.uid)
                 .collection('orders')
                 .doc(paymentIntent.id)
