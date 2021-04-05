@@ -1,7 +1,7 @@
 # KeepHome - OnlineStore based on React, Firebase and Stripe payments.
 URL: https://online-store-1f7b2.web.app/
 
-Database:
+
 ![1](https://user-images.githubusercontent.com/26245125/113571333-e3cd4d00-961e-11eb-9e50-c3c4160e65fc.JPG)
 ![2](https://user-images.githubusercontent.com/26245125/113571337-e465e380-961e-11eb-9d38-2bc670081040.JPG)
 ![3](https://user-images.githubusercontent.com/26245125/113571338-e4fe7a00-961e-11eb-9df9-776e7c9ea3c3.JPG)
