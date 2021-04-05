@@ -1,4 +1,4 @@
-## KeepHome - OnlineStore based on React, Firebase and Stripe payments.
+# KeepHome - OnlineStore based on React, Firebase and Stripe payments.
 # URL: https://online-store-1f7b2.web.app/
 
 ## How the navbar looks when there is no logged user:
