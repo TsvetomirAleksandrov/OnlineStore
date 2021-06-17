@@ -13,6 +13,7 @@ function Home() {
     const fetchData = async () => {
       const data = await db.collection('products').get();
       setProducts(data.docs.map(doc => doc.data()));
+      
     }
     fetchData()
   }, []);
